@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-do List</title>
+    <style>
+        body{
+            background-color: #000;
+            color: #000;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            width:400px;
+            padding:20px;
+            background-color: #eee;
+            border-radius: 8px;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        form{
+            display: flex;
+            justify-content: center;
+        }
+
+        input[type="text"]{
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            margin-right:10px;
+        }
+
+        button{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer
+        }
+
+        button[type="submit"]{
+            background-color: black;
+            color: #fff;
+        }
+
+        button[type="submit"].delete-btn, button[type="submit"].task-btn{
+            background-color: transparent;
+            color: #000;
+        }
+
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+
+        li{
+            background-color: #eee;
+            color: #000;
+            padding:2px 10px;
+            margin:0px;
+            display:flex;
+            align-items:center
+        }
+
+        li.done .task-text{
+            text-decoration: line-through;
+            color: grey;
+        }
+
+        .check {
+            width: 20px;
+            text-align:center;
+        }
+
+        button[type="submit"].delete-btn{
+            margin-left: auto;
+            color: black;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        button[type="submit"].task-btn {
+            cursor: pointer;
+            border:none;
+            font-size: 16px;
+        }
+
+        task-form{
+            flex:1;
+        }
+        .delete-form{
+            margin-left:auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-do List</h1>
+         <form action="{{url_for('add')}}" method="post">
+             <input type="text" name="task" id="task" placeholder="digite uma nova tarefa" required>
+             <button type="submit">Add</button>
+         </form>
+         <ul>
+             {% for task in tasks %}
+             <li class="{% if task.done %}done{% endif %}">
+                 <form class="task-form" action="{{url_for('toggle',task_index=loop.index0)}}" method="post">
+                    <button type="submit" class="task-btn">
+                        <span class="check">
+                             {% if task.done %}
+                             &#10003
+                             {% else %}
+                             &#9675
+                             {% endif %}
+                        </span>
+                        <span class="task-text">{{task.title}}</span>
+                    </button>
+                 </form>
+                 <form class="delete-form" action="{{url_for('delete',task_index=loop.index0)}}" method="post">
+                    <button type="submit" class="delete-btn">
+                        X
+                    </button>
+                 </form>
+                 {% endfor %}
+             </li>
+         </ul>
+    </div>
+</body>
+</html>
