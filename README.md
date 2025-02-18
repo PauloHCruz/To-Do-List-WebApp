@@ -1,6 +1,6 @@
 # Aplicação To-do List
 
-Uma aplicação simples de lista de tarefas construída com Flask. Esse projeto permite adicionar tarefas, marcá-las como concluídas (ícone de check e texto riscado) e deletar tarefas.
+Uma aplicação simples de lista de tarefas construída com Flask. Esse projeto permite adicionar tarefas, marcá-las como concluídas (ícone de check e texto riscado) e deletar tarefas. Cada usuário possui sua própria lista, pois os daos são armazenados na sessão.
 
 ## Funcionalidades
 - **Adicionar Tarefas:** Utilize o campo de entrada para adicionar novas tarefas.
